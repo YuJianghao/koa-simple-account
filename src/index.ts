@@ -49,5 +49,5 @@ export function createSimpleAccount(config: IConfig) {
     router.allowedMethods(),
   ]);
 
-  return { middleware, auth: auth.createMiddleware };
+  return { middleware, auth: auth.createMiddleware.bind(auth) };
 }
