@@ -18,12 +18,11 @@
     "basic-auth": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.3",
-    "koa-router": "^10.1.1",
     "simple-json-db": "^1.2.3"
   },
   "peerDependencies": {
     "koa": "^2.13.3",
-    "koa-router": "^10.1.1"
+    "@koa/router": "^10.1.1"
   },
   "devDependencies": {
     "@types/basic-auth": "^1.1.3",
