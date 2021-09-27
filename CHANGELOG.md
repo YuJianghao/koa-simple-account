@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.3...v0.0.4) (2021-09-27)
+
+
+### Bug Fixes
+
+* peer dep ([e85255b](https://github.com/YuJianghao/koa-simple-account/commit/e85255bd9ae429c60fa9de2f2da0f740422f8282))
+
 ### [0.0.3](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.2...v0.0.3) (2021-09-27)
 
 
