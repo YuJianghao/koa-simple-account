@@ -1,3 +1,4 @@
+import autoExternal from "rollup-plugin-auto-external";
 import clear from "rollup-plugin-clear";
 import typescript from "rollup-plugin-typescript2";
 import { terser } from "rollup-plugin-terser";
@@ -14,7 +15,13 @@ export default {
       format: "esm",
     },
   ],
-  plugins: [clear({ targets: ["dist"] }), typescript(), terser(), filesize()],
+  plugins: [
+    clear({ targets: ["dist"] }),
+    autoExternal(),
+    typescript(),
+    terser(),
+    filesize(),
+  ],
   external: [
     /**
      * @see https://rollupjs.org/guide/en/#core-functionality
