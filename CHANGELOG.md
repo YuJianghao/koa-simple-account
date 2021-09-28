@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.4...v0.0.5) (2021-09-28)
+
+
+### Bug Fixes
+
+* router blocked ([0e69f96](https://github.com/YuJianghao/koa-simple-account/commit/0e69f9699f7241dadd89c1ba5c9625457b0bf7f2))
+
 ### [0.0.4](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.3...v0.0.4) (2021-09-27)
 
 
