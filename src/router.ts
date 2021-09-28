@@ -52,5 +52,9 @@ export default function createRouter(
     ctx.body = { username: storage.getUserInfo().username };
   });
 
+  router.use(async (ctx, next) => {
+    await next();
+  });
+
   return router;
 }
