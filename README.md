@@ -41,7 +41,7 @@ router.get("/protected-by-refresh-token", account.auth("refresh"), (ctx) => {
 
 ## Integrate with web
 
-The simple way is to use `@winwin/vue-simple-account`.
+The simple way is to use [@winwin/vue-simple-account](https://github.com/YuJianghao/vue-simple-account).
 
 Or you can:
 
