@@ -3,7 +3,7 @@ import { KEYS } from "./constants";
 export interface IUserInfo {
   username: string;
 }
-export interface IInternalUserInfo extends IUserInfo {
+export interface IUserInfoWithPwd extends IUserInfo {
   password: string;
 }
 export interface IAuthInfo {
@@ -48,10 +48,10 @@ export class StorageService {
     info.password = password;
     this.setUserInfo(info);
   }
-  getUserInfo(): IInternalUserInfo {
-    return this.db.get(KEYS.user) as IInternalUserInfo;
+  getUserInfo(): IUserInfoWithPwd {
+    return this.db.get(KEYS.user) as IUserInfoWithPwd;
   }
-  setUserInfo(userInfo: IInternalUserInfo) {
+  setUserInfo(userInfo: IUserInfoWithPwd) {
     this.db.set(KEYS.user, userInfo);
   }
   getblocklist() {

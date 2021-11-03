@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
 import jwt from "jsonwebtoken";
-import { IInternalUserInfo, StorageService } from "./storage";
+import { IUserInfoWithPwd, StorageService } from "./storage";
 import { debug, error } from "./utils";
 type tokenType = "access" | "refresh";
 
@@ -65,7 +65,7 @@ export class AuthService {
     };
   }
 
-  sign(user: IInternalUserInfo) {
+  sign(user: IUserInfoWithPwd) {
     debug(`sign for ${user.username}`);
     const authInfo = this.storage.getAuthInfo();
     const accessToken = jwt.sign(

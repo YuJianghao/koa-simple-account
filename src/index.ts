@@ -3,7 +3,7 @@ import fs from "fs";
 import compose from "koa-compose";
 import JsonDB from "simple-json-db";
 import { defaultUserInfo } from "./constants";
-import { IAuthInfo, StorageService } from "./storage";
+import { IAuthInfo, IUserInfoWithPwd, StorageService } from "./storage";
 import { errorHandler } from "./error";
 import { debug } from "./utils";
 import createRouter from "./router";
@@ -41,7 +41,14 @@ const initialize = (config: IConfig) => {
   setAuthInfo();
   const router = createRouter(storage, auth);
   router.prefix(config.base || "");
-  return { router, auth, setAuthInfo };
+  const setUserInfo = ({
+    username,
+    password,
+  }: Partial<IUserInfoWithPwd> = {}) => {
+    username && storage.changeUsername(username);
+    password && storage.changePassword(password);
+  };
+  return { router, auth, setAuthInfo, setUserInfo };
 };
 
 export function createSimpleAccount(config: IConfig) {

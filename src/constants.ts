@@ -1,4 +1,4 @@
-import { IInternalUserInfo } from "./storage";
+import { IUserInfoWithPwd } from "./storage";
 
 export const KEYS = {
   install: "install",
@@ -7,7 +7,7 @@ export const KEYS = {
   blocklist: "blocklist",
 };
 
-export const defaultUserInfo: IInternalUserInfo = {
+export const defaultUserInfo: IUserInfoWithPwd = {
   username: "admin",
   password: "admin",
 };
