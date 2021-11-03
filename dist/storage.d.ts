@@ -2,7 +2,7 @@ import JsonDB from "simple-json-db";
 export interface IUserInfo {
     username: string;
 }
-export interface IInternalUserInfo extends IUserInfo {
+export interface IUserInfoWithPwd extends IUserInfo {
     password: string;
 }
 export interface IAuthInfo {
@@ -24,8 +24,8 @@ export declare class StorageService {
     setInstalled(): void;
     changeUsername(username: string): void;
     changePassword(password: string): void;
-    getUserInfo(): IInternalUserInfo;
-    setUserInfo(userInfo: IInternalUserInfo): void;
+    getUserInfo(): IUserInfoWithPwd;
+    setUserInfo(userInfo: IUserInfoWithPwd): void;
     getblocklist(): string[];
     isBlocked(token: string): boolean;
     block(tokens: string | string[]): void;
