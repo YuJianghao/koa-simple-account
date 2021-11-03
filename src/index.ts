@@ -35,19 +35,22 @@ const initialize = (config: IConfig) => {
     expiresIn: config.expiresIn,
     refreshableIn: config.refreshableIn,
   };
-  storage.setAuthInfo(authInfo);
+  const setAuthInfo = (newInfo: Partial<IAuthInfo> = {}) => {
+    storage.setAuthInfo({ ...authInfo, ...newInfo });
+  };
+  setAuthInfo();
   const router = createRouter(storage, auth);
   router.prefix(config.base || "");
-  return { router, auth };
+  return { router, auth, setAuthInfo };
 };
 
 export function createSimpleAccount(config: IConfig) {
-  const { router, auth } = initialize(config);
+  const { router, auth, setAuthInfo } = initialize(config);
   const middleware = compose([
     errorHandler,
     router.routes(),
     router.allowedMethods(),
   ]);
 
-  return { middleware, auth: auth.createMiddleware.bind(auth) };
+  return { middleware, auth: auth.createMiddleware.bind(auth), setAuthInfo };
 }
