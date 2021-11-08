@@ -1,5 +1,5 @@
-/// <reference types="koa" />
 /// <reference types="koa__router" />
+import { Context, Next } from "koa";
 import { IAuthInfo, IUserInfoWithPwd } from "./storage";
 interface IConfig {
     path: string;
@@ -9,8 +9,8 @@ interface IConfig {
     base?: string;
 }
 export declare function createSimpleAccount(config: IConfig): {
-    middleware: import("koa").Middleware<import("koa").DefaultState, import("koa").Context & import("koa").DefaultContext & import("@koa/router").RouterParamContext<import("koa").DefaultState, import("koa").DefaultContext>, any>;
-    auth: (type?: "access" | "refresh") => (ctx: import("koa").Context, next: import("koa").Next) => Promise<void>;
+    middleware: import("koa").Middleware<import("koa").DefaultState, Context & import("koa").DefaultContext & import("@koa/router").RouterParamContext<import("koa").DefaultState, import("koa").DefaultContext>, any>;
+    auth: (type?: import("./types").tokenType) => (ctx: Context, next: Next) => Promise<void>;
     setAuthInfo: (newInfo?: Partial<IAuthInfo>) => void;
     setUserInfo: ({ username, password, }?: Partial<IUserInfoWithPwd>) => void;
 };

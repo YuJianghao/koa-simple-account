@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
 import { IUserInfoWithPwd, StorageService } from "./storage";
-declare type tokenType = "access" | "refresh";
+import { tokenType } from "./types";
 export declare class AuthService {
     private storage;
     constructor(storage: StorageService);
@@ -11,4 +11,3 @@ export declare class AuthService {
         refreshToken: string;
     };
 }
-export {};
