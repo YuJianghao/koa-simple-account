@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.9...v0.0.10) (2021-11-08)
+
+
+### Bug Fixes
+
+* 报错处理影响到外部应用 ([50399a1](https://github.com/YuJianghao/koa-simple-account/commit/50399a1833a1dd462e6620ebb57092286b9f81af))
+
 ### [0.0.9](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.8...v0.0.9) (2021-11-08)
 
 
