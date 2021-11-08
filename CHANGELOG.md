@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.8...v0.0.9) (2021-11-08)
+
+
+### Features
+
+* set user info api ([c747e24](https://github.com/YuJianghao/koa-simple-account/commit/c747e2491b519104368d4fd9df8bc8180bbb5cc5))
+
 ### [0.0.8](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.7...v0.0.8) (2021-11-08)
 
 
