@@ -28,7 +28,15 @@ interface IConfig {
 }
 
 const initialize = (config: IConfig) => {
-  //#region storage
+  //#region options
+  const authInfo: IAuthInfo = {
+    secret: config.secret,
+    expiresIn: config.expiresIn,
+    refreshableIn: config.refreshableIn,
+  };
+  //#endregion
+
+  //#region services
   const dirname = path.dirname(config.path); // db file
   if (!fs.existsSync(dirname)) {
     fs.mkdirSync(dirname);
@@ -36,14 +44,18 @@ const initialize = (config: IConfig) => {
   }
   const storage = new StorageService(new JsonDB(config.path));
   const auth = new AuthService(storage);
+  //#endregion
+
+  //#region auth info
   if (!storage.installed()) {
     storage.setUserInfo(defaultUserInfo);
+    storage.setAuthInfo(authInfo);
     storage.setInstalled();
     debug(`first install: set defualt userinfo`);
   }
   //#endregion
 
-  //#region storage helpers
+  //#region helpers
   const setAuthInfo = (newInfo: Partial<IAuthInfo> = {}) => {
     storage.setAuthInfo({ ...storage.getAuthInfo(), ...newInfo });
   };
@@ -56,19 +68,11 @@ const initialize = (config: IConfig) => {
   };
   //#endregion
 
-  //#region auth info
-  const authInfo: IAuthInfo = {
-    secret: config.secret,
-    expiresIn: config.expiresIn,
-    refreshableIn: config.refreshableIn,
-  };
-  if (!storage.installed()) setAuthInfo(authInfo);
-  //#endregion
-
   //#region router
   const router = createRouter(storage, auth);
   router.prefix(config.base || "");
   //#endregion
+
   return { router, auth, setAuthInfo, setUserInfo };
 };
 
