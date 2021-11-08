@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.10...v0.0.11) (2021-11-08)
+
+
+### Bug Fixes
+
+* 初次安装不写入 auth info ([df93697](https://github.com/YuJianghao/koa-simple-account/commit/df93697ff5e2b8f269896587b8bba01efcf6ecd2))
+
 ### [0.0.10](https://github.com/YuJianghao/koa-simple-account/compare/v0.0.9...v0.0.10) (2021-11-08)
 
 
