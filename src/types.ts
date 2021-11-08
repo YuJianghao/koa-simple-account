@@ -5,3 +5,5 @@ declare module "koa" {
     user?: IUserInfo & { type: "access" | "refresh" };
   }
 }
+
+export type tokenType = "access" | "refresh";

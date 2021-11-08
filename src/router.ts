@@ -1,9 +1,10 @@
 import { Context } from "koa";
 import Router from "@koa/router";
 import basicAuth from "basic-auth";
-import { debug, error } from "./utils";
 import { StorageService } from "./storage";
 import { AuthService } from "./auth";
+import { debug } from "./utils";
+import { BasicAuthError, NotBasicAuthError } from "./errors";
 
 export default function createRouter(
   storage: StorageService,
@@ -15,12 +16,12 @@ export default function createRouter(
     const user = basicAuth.parse(ctx.request.headers.authorization || "");
     if (!user) {
       debug("basic auth required");
-      throw error(401, "Authentication Error");
+      throw new NotBasicAuthError();
     }
     const target = storage.getUserInfo();
     if (user.name !== target.username || user.pass !== target.password) {
       debug("basic auth failed");
-      throw error(401, "Authentication Error");
+      throw new BasicAuthError();
     }
     debug(`${target.username} signin`);
     ctx.body = auth.sign(target);

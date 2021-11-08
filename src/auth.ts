@@ -1,14 +1,22 @@
 import { Context, Next } from "koa";
 import jwt from "jsonwebtoken";
 import { IUserInfoWithPwd, StorageService } from "./storage";
-import { debug, error } from "./utils";
-type tokenType = "access" | "refresh";
+import { debug } from "./utils";
+import {
+  EmptyAuthticationHeaderError,
+  InvalidAuthticationHeaderError,
+  InvalidTokenError,
+  TokenBlockedError,
+  TokenDecodeError,
+  TokenTypeError,
+} from "./errors";
+import { tokenType } from "./types";
 
 export class AuthService {
   constructor(private storage: StorageService) {}
   resolveAuthorizationHeader(ctx: Context) {
     if (!ctx.header || !ctx.header.authorization) {
-      throw error(401, "Authtication Error");
+      throw new EmptyAuthticationHeaderError();
     }
 
     const parts = ctx.header.authorization.split(" ");
@@ -21,7 +29,7 @@ export class AuthService {
         return credentials;
       }
     }
-    throw error(401, "Authtication Error");
+    throw new InvalidAuthticationHeaderError();
   }
 
   createMiddleware(type: tokenType = "access") {
@@ -29,7 +37,7 @@ export class AuthService {
       const token = this.resolveAuthorizationHeader(ctx);
       if (this.storage.isBlocked(token)) {
         debug("token has been blocked");
-        throw error(401, "Authentication Error");
+        throw new TokenBlockedError();
       }
       try {
         jwt.verify(token, this.storage.getAuthInfo().secret);
@@ -39,7 +47,7 @@ export class AuthService {
           ["JsonWebTokenError", "TokenExpiredError"].includes(err.name)
         ) {
           debug(`fail to verify token`);
-          throw error(401, "Authentication Error");
+          throw new InvalidTokenError();
         } else throw err;
       }
       const user = jwt.decode(token);
@@ -53,14 +61,14 @@ export class AuthService {
       ) {
         if (user.type !== type) {
           debug(`wrong token type: ${type} is required but found ${user.type}`);
-          throw error(401, "Authentication Error");
+          throw new TokenTypeError(type);
         } else {
           ctx.state.user = { username: user.username, type: user.type };
           await next();
         }
       } else {
         debug(`fail to decode token: `, user);
-        throw new Error("TokenDecodeError");
+        throw new TokenDecodeError();
       }
     };
   }
