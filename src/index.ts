@@ -38,7 +38,7 @@ const initialize = (config: IConfig) => {
   const setAuthInfo = (newInfo: Partial<IAuthInfo> = {}) => {
     storage.setAuthInfo({ ...authInfo, ...newInfo });
   };
-  setAuthInfo();
+  if (!storage.installed()) setAuthInfo();
   const router = createRouter(storage, auth);
   router.prefix(config.base || "");
   const setUserInfo = ({
