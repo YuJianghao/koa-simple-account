@@ -52,12 +52,17 @@ const initialize = (config: IConfig) => {
 };
 
 export function createSimpleAccount(config: IConfig) {
-  const { router, auth, setAuthInfo } = initialize(config);
+  const { router, auth, setAuthInfo, setUserInfo } = initialize(config);
   const middleware = compose([
     errorHandler,
     router.routes(),
     router.allowedMethods(),
   ]);
 
-  return { middleware, auth: auth.createMiddleware.bind(auth), setAuthInfo };
+  return {
+    middleware,
+    auth: auth.createMiddleware.bind(auth),
+    setAuthInfo,
+    setUserInfo,
+  };
 }
