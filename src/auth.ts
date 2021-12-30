@@ -6,6 +6,7 @@ import {
   EmptyAuthticationHeaderError,
   InvalidAuthticationHeaderError,
   InvalidTokenError,
+  NotBasicAuthError,
   TokenBlockedError,
   TokenDecodeError,
   TokenTypeError,
@@ -14,6 +15,14 @@ import { tokenType } from "./types";
 
 export class AuthService {
   constructor(private storage: StorageService) {}
+  resolveBasicAuth(ctx: Context) {
+    const user = ctx.request.body;
+    if (!user || !("username" in user) || !("password" in user)) {
+      throw new NotBasicAuthError();
+    } else {
+      return user as IUserInfoWithPwd;
+    }
+  }
   resolveAuthorizationHeader(ctx: Context) {
     if (!ctx.header || !ctx.header.authorization) {
       throw new EmptyAuthticationHeaderError();
