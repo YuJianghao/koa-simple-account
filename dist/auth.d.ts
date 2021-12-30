@@ -4,6 +4,7 @@ import { tokenType } from "./types";
 export declare class AuthService {
     private storage;
     constructor(storage: StorageService);
+    resolveBasicAuth(ctx: Context): IUserInfoWithPwd;
     resolveAuthorizationHeader(ctx: Context): string;
     createMiddleware(type?: tokenType): (ctx: Context, next: Next) => Promise<void>;
     sign(user: IUserInfoWithPwd): {
