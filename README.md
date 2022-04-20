@@ -1,3 +1,7 @@
+# Use [@winwin/koa-authentication](https://github.com/YuJianghao/koa-authentication) instead
+
+---
+
 # koa-simple-account
 
 ## Why?
